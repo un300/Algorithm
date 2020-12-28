@@ -1,6 +1,8 @@
 def prime_number(k) :
     if k == 1 :
         return False
+    elif k == 2:
+        return True
     elif k % 2 == 0 :
         return False
     else :
@@ -19,14 +21,14 @@ for _ in range(n) :
     small, big = half, half
     while 1 :
         if prime_number(small) and prime_number(big):
-            print(small, big)
+            print('{} {}' .format(small, big))
             break
         else :
             small, big = int(small-1), int(big+1)
 
 
 
-## 왜 런타임에러??????????
+
 
 
 
