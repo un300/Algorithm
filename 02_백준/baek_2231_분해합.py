@@ -1,11 +1,15 @@
-
 N = int(input())
 
-num = 0
-for i in range(1, N+1):
-    div_num = list(map(int, str(i)))
-    sum_num = i + sum(div_num)
-    if(sum_num == N):
-        num = i
+
+for n in range(1, N+1):
+    digit_list = list(map(int, str(n)))
+    answer = n + sum(digit_list)
+    if answer == N :
+        result = n
         break
-print(num)
+
+    if n == N:
+        result = 0
+        break
+
+print(result)
