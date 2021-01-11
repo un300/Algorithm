@@ -12,7 +12,10 @@ for alphabet in alphabet_list:
 
 sort_dict = sorted(cnt_dict.items(), key=lambda x : (x[1], x[0]), reverse=True)
 
-if sort_dict[0][1] == sort_dict[1][1] :
-    print('?')
-else :
+try :
+    if sort_dict[0][1] == sort_dict[1][1] :
+        print('?')
+    else :
+        print(sort_dict[0][0])
+except :
     print(sort_dict[0][0])
