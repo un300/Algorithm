@@ -1,13 +1,17 @@
-# N = int(input())
+N = int(input())
 
-# cnt = 0
-# for _ in range(N) :
-#     input_chr = input()
-#     used_alphabet = []
+cnt = N
+for _ in range(N) :
+    input_chr = input()
 
-#     for factor in factor_list :
-#         if factor not in used_alphabet :
-#             used_alphabet.append(factor)
+    breaker = False
+    for idx1, element1 in enumerate(input_chr) :
+        for idx2, element2 in enumerate(input_chr) :
+            if ( element1 == element2 ) & ( len(set(input_chr[idx1:idx2+1])) > 1 ) :
+                cnt -= 1
+                breaker = True
+                break
+        if breaker :
+            break
 
-# 모르겟다요!
-
+print(cnt)

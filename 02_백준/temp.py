@@ -1,3 +1,3 @@
 a = 'happy'
 
-print(a.index('p'))
+print(a.count())
