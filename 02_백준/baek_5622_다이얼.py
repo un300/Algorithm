@@ -1,7 +1,6 @@
 
 input_alphabet_list = input()
 
-
 dial_dict = {
     'ABC'  : 2 + 1,
     'DEF'  : 3 + 1,
@@ -12,7 +11,6 @@ dial_dict = {
     'TUV'  : 8 + 1,
     'WXYZ' : 9 + 1
 }
-
 
 answer_list = []
 for key in dial_dict.keys() :

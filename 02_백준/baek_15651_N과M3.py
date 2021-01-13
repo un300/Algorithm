@@ -9,5 +9,7 @@ for _ in range(M) :
 
 
 answer = sorted(itertools.product(*array))
-print(answer)
+
+for element in answer :
+    print(' '.join(map(str, element)))
 
