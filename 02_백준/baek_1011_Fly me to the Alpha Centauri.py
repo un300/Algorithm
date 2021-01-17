@@ -1,14 +1,14 @@
 T = int(input())
 
-for _ in range(T) :
-    x, y = map(int, input().split())
-    y = y - 1  # 마지막은 거리를 1로 이동해야하기 떄문에 1뺴주고 cnt는 0이 아닌 1부터 시작
-
-    move = 1
-    cnt = 1
-    while x < y :
-        x += move
-        cnt += 1
-        move += 1
-    
-    print(cnt)
+for _ in range(T):
+    x, y = map(int,input().split())
+    distance = y - x
+    count = 0  # 이동 횟수
+    move = 1  # count별 이동 가능한 거리
+    move_plus = 0  # 이동한 거리의 합
+    while move_plus < distance :
+        count += 1
+        move_plus += move  # count 수에 해당하는 move를 더함
+        if count % 2 == 0 :  # count가 2의 배수일 때, 
+            move += 1  
+    print(count)
