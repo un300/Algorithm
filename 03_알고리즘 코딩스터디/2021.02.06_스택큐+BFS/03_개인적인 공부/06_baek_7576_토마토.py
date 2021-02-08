@@ -9,7 +9,7 @@ def BFS(x, y, array):
     cnt = 0
     while queue[0] :
         today_mature_list = queue.popleft()
-        
+        cnt += 1
         tommorow_mature_list = []
         for x, y in today_mature_list :
             for dx, dy in direction :
@@ -21,7 +21,6 @@ def BFS(x, y, array):
                         tommorow_mature_list.append((nx, ny))
                         array[ny][nx] = 1
         queue.append(tommorow_mature_list)
-        cnt += 1
     return cnt
 
 
@@ -40,7 +39,7 @@ def solution() :
         input_list = list(map(int, input().split()))
         array.append(input_list)
 
-    _x, _y = [(_x, _y) for _y, element_list in enumerate(array) for _x, element in enumerate(element_list) if element == 1][0]
+    tomato_location = [(_x, _y) for _y, element_list in enumerate(array) for _x, element in enumerate(element_list) if element == 1][0]
 
     print(BFS(_x, _y, array))
     
