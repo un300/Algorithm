@@ -4,44 +4,69 @@
 # D 1  > 최댓값 삭제
 # D -1 > 최솟값 삭제
 
-from collections import deque
-import bisect
 
-class Solution_class:    
+import heapq
+import sys
+
+### (1) 클래스 구현
+
+class dual_priority_queue :
     def __init__(self) :
-        self.Q = deque([])
+        self.max_heap = []
+        self.min_heap = []
+        self.cnt_dict = {}
 
-    def dual_priority_queue(self, way, n):
+    def input_data(self, way, n):
         if way == 'I' :
-            bisect.insort(self.Q, n)
+            heapq.heappush(self.min_heap, n)
+            heapq.heappush(self.max_heap, -n)
 
-        elif (n==1) & (len(self.Q)>0) :
-            self.Q.pop()
-
-        elif (n==-1) & (len(self.Q)>0):
-            self.Q.popleft()
-        
-        print(self.Q)
-
-
-
-def solution():
-    T = int(input())
-    for _ in range(T) :
-        k = int(input())
-        instance = Solution_class()
-        for _ in range(k) :
-            way, n = input().split()
-            n = int(n)
-            instance.dual_priority_queue(way, n)
-
-        if instance.Q :
-            max_value = instance.Q.pop()
-            min_value = instance.Q.popleft()
-
-            print('{} {}' .format(max_value, min_value))
+            if n not in self.cnt_dict.keys() :
+                self.cnt_dict[n] = 1
+            else :
+                self.cnt_dict[n] += 1
         else :
-            print('EMPTY')
+            if not list(self.cnt_dict.keys()) :
+                return True
+            elif n==1 :
+                while self.max_heap :
+                    max_value = -heapq.heappop(self.max_heap)
+                    if max_value in self.cnt_dict.keys() :
+                        self.cnt_dict[max_value] -= 1
+                        if self.cnt_dict[max_value] == 0 :
+                            del self.cnt_dict[max_value]
+            else :
+                while self.min_heap :
+                    min_value = heapq.heappop(self.min_heap)
+                    if min_value in self.cnt_dict.keys() :
+                        self.cnt_dict[min_value] -= 1
+                        if self.cnt_dict[min_value] == 0 :
+                            del self.cnt_dict[min_value]
 
+#### (2) 문제해결
+
+def solution() :
+
+    fast_input = sys.stdin.readline
+    
+    T = int(fast_input().strip())
+    for _ in range(T) :
+        k = int(fast_input().strip())
+        instance = dual_priority_queue()
+        for _ in range(k) :
+            way, n = fast_input().strip().split()
+            n = int(n)
+
+            instance.input_data(way, n)
+        
+        answer_list = sorted(instance.cnt_dict.keys())
+
+        if not answer_list :
+            print('EMPTY')
+        else :
+            min_answer = answer_list[0]
+            max_answer = answer_list.pop()
+            print('{} {}' .format(max_answer, min_answer))
+            
 
 solution()
