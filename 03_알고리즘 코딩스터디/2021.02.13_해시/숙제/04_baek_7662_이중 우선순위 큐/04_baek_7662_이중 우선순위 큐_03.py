@@ -35,6 +35,7 @@ class dual_priority_queue :
                         self.cnt_dict[max_value] -= 1
                         if self.cnt_dict[max_value] == 0 :
                             del self.cnt_dict[max_value]
+                        break
             else :
                 while self.min_heap :
                     min_value = heapq.heappop(self.min_heap)
@@ -42,6 +43,7 @@ class dual_priority_queue :
                         self.cnt_dict[min_value] -= 1
                         if self.cnt_dict[min_value] == 0 :
                             del self.cnt_dict[min_value]
+                        break
 
 #### (2) 문제해결
 
