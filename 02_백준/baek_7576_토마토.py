@@ -69,37 +69,31 @@
 
 
 from collections import deque
-import sys
-
 
 def Tomato(ripe_tomato_list, array) :
-    queue = deque([ripe_tomato_list])
+    queue = deque(ripe_tomato_list)
     direction = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-    day = 0
-
-    while queue[0] :
-        day += 1
-        today_tomato = queue.popleft()
-        
-        tommorow_tomato = []
-        for row, col in today_tomato :
-            array[row][col] = 1
-
-            for dr, dc in direction :
-                nr = row + dr
-                nc = col + dc
-                if (0<=nr<len(array)) & (0<=nc<len(array[0])) :
-                    if array[nr][nc] == 0:
-                        tommorow_tomato.append((nr, nc))
-        queue.append(tommorow_tomato)
-
-    return day - 1
-
+    while queue :
+        row, col = queue.popleft()
+        for dr, dc in direction :
+            nr = row + dr
+            nc = col + dc
+            if (0<=nr<len(array)) & (0<=nc<len(array[0])) :
+                if array[nr][nc]==0 :
+                    array[nr][nc] = array[row][col] + 1
+                    queue.append((nr, nc))
+    
+    result = 0
+    for elements in array :
+        for element in elements :
+            if result <= element :
+                result = element
+    
+    return result-1
 
 def solution() :
-    fast_input = sys.stdin.readline
-    col, row = map(int, fast_input().rstrip().split())
-    array = [ list(map(int, fast_input().rstrip().split())) for _ in range(row) ]
+    col, row = map(int, input().split())
+    array = [ list(map(int, input().split())) for _ in range(row) ]
 
     ripe_tomato = []
     for dr in range(row) :
@@ -108,7 +102,7 @@ def solution() :
                 ripe_tomato.append((dr, dc))
 
 
-    answer = Tomato(ripe_tomato, array)   
+    answer = Tomato(ripe_tomato, array)
 
     for r in range(row) :
         for c in range(col) :
