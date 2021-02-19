@@ -1,13 +1,22 @@
-n, k = map(int, input().split())
-m = []
-num = 0
-for i in range(n):
-    m.append(int(input()))
-for i in range(n - 1, -1, -1):
-    if k == 0:
-        break
-    if m[i] > k:
-        continue
-    num += k // m[i]
-    k %= m[i]
-print(num)
+## 그리디 알고리즘
+
+
+
+
+def solution() :
+    N, K = map(int, input().split())
+    coin_kinds = []
+    for _ in range(N) :
+        coin_kinds.append(int(input()))
+    
+    coin_kinds.sort(reverse=True)
+    answer = 0
+
+    for coin in coin_kinds :
+        answer += K // coin
+        K = K % coin
+    return answer        
+
+
+
+print(solution())
