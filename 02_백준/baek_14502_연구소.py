@@ -5,11 +5,12 @@ from collections import deque
 
 def BFS(map_, N, M, location) :
     direction = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-    queue = deque([location])
+    queue = deque(location)
     
     while queue :
         row, col = queue.popleft()
         map_[row][col] = 2
+        print(map_)
 
         for dr, dc in direction :
             nr = row + dr
@@ -25,11 +26,15 @@ def BFS(map_, N, M, location) :
 def set_wall(map_, N, M, wall_cnt) :
     global big_cnt
     if wall_cnt == 3 :
+        virus_location = []
         copy_map_ = copy.deepcopy(map_)
         for row in range(N) :
             for col in range(M) :
                 if copy_map_[row][col] == 2:
-                    BFS(copy_map_, N, M, (row, col))
+                    virus_location.append((row, col))
+        
+        BFS(copy_map_, N, M, virus_location)
+                    
 
         temp_cnt = 0
         for element_list in copy_map_ :
@@ -39,7 +44,7 @@ def set_wall(map_, N, M, wall_cnt) :
 
         big_cnt = max(temp_cnt, big_cnt)
 
-        return
+        return True
 
 
     for row in range(N) :
