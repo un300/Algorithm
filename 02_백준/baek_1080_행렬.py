@@ -65,12 +65,6 @@ def convert(row, col, arr) :
             arr[r][c] = 1 - arr[r][c]
     return arr
 
-
-
-
-
-
-
 def solution() :
     N, M = map(int, input().split())
 
@@ -83,8 +77,14 @@ def solution() :
             if A[r][c] != B[r][c] :
                 A = convert(r, c, A)
                 cnt += 1
-    print(cnt)
 
+    for r in range(N) :
+        for c in range(M) :
+            if A[r][c] != B[r][c] :
+                print(-1)
+                return
+
+    print(cnt)
 
 solution()
 
