@@ -77,7 +77,6 @@ from collections import deque
 def BFS(start, map_, N) :
     global land
     global beach
-    global beach_label
 
     direction = [(1, 0), (-1, 0), (0, 1), (0, -1)]
     queue = deque([start])
@@ -95,21 +94,20 @@ def BFS(start, map_, N) :
                     map_[nr][nc] = land
                 elif map_[nr][nc] == 0 :
                     beach.append((row, col))
-                    beach_label.append(map_[row][col])
     
 
 def extension(map_, N) :
     global beach
-    global beach_label
-
     direction = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
     loop = 1
     while beach :
-        for _ in range(len(beach)):
 
-            land_set = set(beach_label)
+        beach_label = deque(list(map(lambda x : map_[x[0]][x[1]], beach)))
+
+        for _ in range(len(beach)):
             r, c = beach.popleft()
+            land_set = set(beach_label)
             beach_label.popleft()
 
             for dr, dc in direction :
@@ -119,7 +117,6 @@ def extension(map_, N) :
                     if map_[nr][nc] == 0 :
                         map_[nr][nc] = map_[r][c]
                         beach.append((nr, nc))
-                        beach_label.append(map_[r][c])
                     elif (map_[r][c] != map_[nr][nc]) & (len(land_set)!=1) :
                         return 2*loop-1
                     elif (map_[r][c] != map_[nr][nc]) :
@@ -132,10 +129,8 @@ def solution() :
 
     global land
     global beach
-    global beach_label
     land = 0
     beach = deque([])
-    beach_label = deque([])
     for row in range(N) :
         for col in range(N) :
             if map_[row][col] == 1 :
