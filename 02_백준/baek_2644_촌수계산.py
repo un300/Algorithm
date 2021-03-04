@@ -6,7 +6,7 @@ def BFS(start, relation, distance) :
     cnt = 1
     while queue :
         cnt += 1
-        for _ in range(len(queue)):     ### 이 부분 다시보기! 한번 들어온 노드들은 모두 한번에 출력해서 봐야함
+        for _ in range(len(queue)):     ### 이 부분 다시보기! 한번에 들어온 노드들은 모두 한번에 출력해서 봐야함
             current = queue.popleft()
             for linked in relation[current] :
                 if not distance[linked] :
